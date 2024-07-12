@@ -6,10 +6,20 @@
 <MudSnackbarProvider />
 <MudRTLProvider RightToLeft>
     <CascadingAuthenticationState>
-        <AppBar />
         <MudLayout>
+            <AppBar @bind-DrawerOpen=_DrawerOpen />
+            <AuthorizeView>
+                <NotAuthorized>
+                    <MudDrawer @bind-Open="_DrawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+                        <NavMenu />
+                    </MudDrawer>
+                </NotAuthorized>
+            </AuthorizeView>
+
             <MudMainContent Class="mt-16 pa-4">
-                @Body
+                <MudContainer MaxWidth="MaxWidth.Medium">
+                    @Body
+                </MudContainer>
             </MudMainContent>
         </MudLayout>
     </CascadingAuthenticationState>
@@ -23,6 +33,7 @@
 </div>
 
 @code {
+    bool _DrawerOpen = true;
     private bool _isDarkMode = false;
     private MudTheme? _theme = null;
 
@@ -82,7 +93,8 @@
             DrawerBackground = "#ffffff",
             GrayLight = "#e8e8e8",
             GrayLighter = "#f9f9f9",
-            Primary = "#2c9111",
+            Primary = "#4CAF50",
+            Secondary = "#00BCD4"
         };
 
     private readonly PaletteDark _darkPalette = new()

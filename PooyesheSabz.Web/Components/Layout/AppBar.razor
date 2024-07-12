@@ -1,14 +1,28 @@
 ﻿<MudAppBar Elevation="1">
+    <AuthorizeView>
+        <NotAuthorized>
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="UpdateCurrentCounterValue" />
+        </NotAuthorized>
+    </AuthorizeView>
     <MudText Typo="Typo.h5" Class="ml-3" Color="Color.Default">پویش سبز کریم الائمه</MudText>
     <MudSpacer />
     <AuthorizeView>
         <NotAuthorized>
             <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Login" Href="/Accounts/Login">ورود | ثبت نام</MudButton>
         </NotAuthorized>
-        <Authorized>
-            <MudBadge Content="0" Overlap="true" Visible="false" Class="mx-6 my-4">
-                <MudIconButton Variant="Variant.Text" Icon="@Icons.Material.Filled.Email" Color="Color.Default" />
-            </MudBadge>
-        </Authorized>
     </AuthorizeView>
 </MudAppBar>
+
+@code {
+    [Parameter]
+    public bool DrawerOpen { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> DrawerOpenChanged { get; set; }
+
+    async Task UpdateCurrentCounterValue()
+    {
+        DrawerOpen = !DrawerOpen;
+        await DrawerOpenChanged.InvokeAsync(DrawerOpen);
+    }
+}
