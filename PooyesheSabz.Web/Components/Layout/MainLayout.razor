@@ -5,21 +5,14 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudRTLProvider RightToLeft>
-    <MudLayout>
-        <MudAppBar Elevation="1">
-            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-            <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
-            <MudSpacer />
-            <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-        </MudAppBar>
-        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-            <NavMenu />
-        </MudDrawer>
-        <MudMainContent Class="mt-16 pa-4">
-            @Body
-        </MudMainContent>
-    </MudLayout>
+    <CascadingAuthenticationState>
+        <AppBar />
+        <MudLayout>
+            <MudMainContent Class="mt-16 pa-4">
+                @Body
+            </MudMainContent>
+        </MudLayout>
+    </CascadingAuthenticationState>
 </MudRTLProvider>
 
 
@@ -30,38 +23,62 @@
 </div>
 
 @code {
-    private bool _drawerOpen = true;
-    private bool _isDarkMode = true;
+    private bool _isDarkMode = false;
     private MudTheme? _theme = null;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        string[] boldFontFamily = { "vazir-bold" };
         _theme = new()
             {
+                Typography = new Typography()
+                {
+                    Default = new Default()
+                    {
+                        FontFamily = ["vazir-regular"]
+                    },
+                    H1 = new H1
+                    {
+                        FontFamily = boldFontFamily,
+                        FontSize = "3.75rem"
+                    },
+                    H2 = new H2
+                    {
+                        FontFamily = boldFontFamily,
+                        FontSize = "2.75rem"
+                    },
+                    H3 = new H3
+                    {
+                        FontFamily = boldFontFamily,
+                        FontSize = "1.75rem"
+                    },
+                    H4 = new H4
+                    {
+                        FontFamily = boldFontFamily,
+                        FontSize = "0.75rem"
+                    },
+                    H5 = new H5
+                    {
+                        FontFamily = boldFontFamily
+                    },
+                    H6 = new H6
+                    {
+                        FontFamily = boldFontFamily
+                    }
+                },
                 PaletteLight = _lightPalette,
                 PaletteDark = _darkPalette,
                 LayoutProperties = new LayoutProperties()
             };
     }
 
-
-    private void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-
-    private void DarkModeToggle()
-    {
-        _isDarkMode = !_isDarkMode;
-    }
-
     private readonly PaletteLight _lightPalette = new()
         {
             Black = "#110e2d",
             AppbarText = "#424242",
-            AppbarBackground = "rgba(255,255,255,0.8)",
+            AppbarBackground = "rgba(80, 145, 25,0.8)",
             DrawerBackground = "#ffffff",
             GrayLight = "#e8e8e8",
             GrayLighter = "#f9f9f9",
@@ -95,12 +112,6 @@
             Divider = "#292838",
             OverlayLight = "#1e1e2d80",
         };
-
-    public string DarkLightModeButtonIcon => _isDarkMode switch
-    {
-        true => Icons.Material.Rounded.AutoMode,
-        false => Icons.Material.Outlined.DarkMode,
-    };
 }
 
 
