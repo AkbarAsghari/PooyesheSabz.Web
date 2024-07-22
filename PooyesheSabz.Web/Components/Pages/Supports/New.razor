@@ -1,0 +1,20 @@
+﻿@page "/Supports/New"
+
+<MudTabs Elevation="4" Rounded="true" Color="@Color.Primary" PanelClass="pa-5">
+    <MudTabPanel Text="نقدی">
+        <MudText Typo="Typo.h3" Class="mb-2" Color="Color.Primary">حمایت بصورت نقدی</MudText>
+        <MudText>برای حمایت بصورت نقدی لطفا مبلغ مد نظر خود را بصورت تومان وارد نمایید</MudText>
+        <MudText>از مبلغ پرداختی شما برای خرید کالا ها و اقلام لازم جهت تهییه خیرات استفاده خواهد شد</MudText>
+        <MudText>با آرزوی قبولی دعا های شما</MudText>
+        <MudForm @ref="_CashPaymentForm">
+            <MudItem xs="12" md="7" lg="4" Class="my-2">
+                <MudTextField T="string" Variant="Variant.Outlined" Required RequiredError="لطفا مبلغ حمایتی خود را وارد نمایید" Placeholder="مبلغ بصورت تومان" @bind-Value="_Amount"></MudTextField>
+            </MudItem>
+            <MudItem xs="12" md="7" lg="4" Class="my-2">
+                <BaseButton Color="Color.Primary" OnClick="GoToPay" FullWidth Variant="Variant.Filled">پرداخت</BaseButton>
+            </MudItem>
+        </MudForm>
+    </MudTabPanel>
+    @*  <MudTabPanel Text="تعدادی" />
+    <MudTabPanel Text="کالایی" /> *@
+</MudTabs>

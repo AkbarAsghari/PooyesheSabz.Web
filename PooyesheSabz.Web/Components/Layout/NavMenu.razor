@@ -2,9 +2,10 @@
     <Authorized>
         <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
             <MudNavMenu>
-                <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-                <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
-                <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
+                <MudNavLink Href="/Dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">داشبورد</MudNavLink>
+                <MudNavGroup Title="حمایت" Icon="@Icons.Material.Filled.Favorite">
+                    <MudNavLink Href="/Supports/New">جدید</MudNavLink>
+                </MudNavGroup>
                 <MudNavGroup Title="حساب کاربری" Icon="@Icons.Material.Filled.AccountBox">
                     <AuthorizeView Roles="@AuthorizeRoles.Admin" Context="_AdminCTX">
                         <Authorized>

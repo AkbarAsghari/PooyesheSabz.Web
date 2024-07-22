@@ -2,7 +2,7 @@
 
 public sealed class GlobalSettings
 {
-    public const string ApplicationName = "پویش سبز کریم الائمه%";
+    public const string ApplicationName = "پویش سبز کریم الائمه";
     public const bool RightToLeft = true;
     public const bool DarkMode = false;
     public const string APIBaseAddress = "https://localhost:7090/";
