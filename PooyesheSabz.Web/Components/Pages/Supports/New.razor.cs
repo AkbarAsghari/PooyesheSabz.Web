@@ -21,7 +21,7 @@ partial class New
         {
             if (int.TryParse(_Amount, out int amount))
             {
-                var paymentLink = await _SupportRepository.NewSupportAsync(new NewSupportDTO { Amount = amount });
+                var paymentLink = await _SupportRepository.NewSupportAsync(new NewSupportDTO { Amount = amount, SupportType = Enums.SupportTypeEnum.Cash });
 
                 if (!String.IsNullOrEmpty(paymentLink))
                 {

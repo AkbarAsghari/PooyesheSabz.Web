@@ -8,7 +8,7 @@ namespace PooyesheSabz.Web.Enums
 {
     public enum SupportTypeEnum
     {
-        Cash,
+        Cash = 1,
         Goods,
     }
 }
