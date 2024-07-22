@@ -12,14 +12,19 @@ else
     <MudDataGrid Items="@_Supports.OrderByDescending(x=> x.CreateDate)">
         <Columns>
             <PropertyColumn Property="x => x.SupportType" Title="نوع حمایت" />
-            <PropertyColumn Property="x => x.CreateDate" />
-            <TemplateColumn Title="مبلغ">
+            <PropertyColumn Property="x => x.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()" Title="تاریخ"/>
+            <TemplateColumn Title="3 تراکنش های آخر">
                 <CellTemplate>
                     @if (@context.Item.Payments != null)
                     {
                         @foreach (var payment in @context.Item.Payments)
                         {
-                            <MudText>@payment.Amount.ToString()</MudText>
+                            <MudStack Row AlignItems="AlignItems.Center">
+                                <MudAlert Severity="Severity.Info" NoIcon Dense>
+                                    <MudText Typo="Typo.caption">@payment.PaymentStatus</MudText>
+                                </MudAlert>
+                                <MudText Typo="Typo.caption">مبلغ : @payment.Amount.Separate3Digits().EnglishToPersianNumbers()</MudText>
+                            </MudStack>
                         }
                     }
                 </CellTemplate>
