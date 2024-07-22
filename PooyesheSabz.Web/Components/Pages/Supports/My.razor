@@ -1,0 +1,26 @@
+﻿@page "/Supports/My"
+@attribute [Authorize]
+
+@using PooyesheSabz.Web.Enums
+
+@if (_Supports == null)
+{
+
+}
+else
+{
+    <MudDataGrid Items="@_Supports.OrderByDescending(x=> x.CreateDate)">
+        <Columns>
+            <PropertyColumn Property="x => x.SupportType" Title="نوع حمایت" />
+            <PropertyColumn Property="x => x.CreateDate" />
+            <TemplateColumn Title="مبلغ">
+                <CellTemplate>
+                    @if (@context.Item.SupportType == SupportTypeEnum.Cash)
+                    {
+                        <MudText>@context.Item.Amount.ToString()</MudText>
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+}

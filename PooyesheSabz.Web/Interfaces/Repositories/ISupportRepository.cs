@@ -6,5 +6,6 @@ namespace PooyesheSabz.Web.Interfaces.Repositories
     {
         Task<string?> NewSupportAsync(NewSupportDTO model);
         Task<string?> PaySupportAsync(PaySupportDTO model);
+        Task<IEnumerable<SupportDTO>?> GetMySupportsAsync();
     }
 }
