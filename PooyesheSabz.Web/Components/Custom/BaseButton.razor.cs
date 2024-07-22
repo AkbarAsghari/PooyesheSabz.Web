@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
-using MudBlazor;
-using static MudBlazor.Colors;
 
 namespace PooyesheSabz.Web.Components.Custom;
 
