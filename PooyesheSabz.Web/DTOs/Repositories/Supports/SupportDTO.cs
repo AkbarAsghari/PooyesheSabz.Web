@@ -9,8 +9,9 @@ namespace PooyesheSabz.Web.DTOs.Repositories.Supports
 {
     public class SupportDTO
     {
-        public SupportTypeEnum SupportType { get; set; }
-        public int Amount { get; set; }
+        public Guid Id { get; set; }
+        public string SupportType { get; set; }
         public DateTime CreateDate { get; set; }
+        public IEnumerable<SupportPaymentDTO> Payments { get; set; }
     }
 }

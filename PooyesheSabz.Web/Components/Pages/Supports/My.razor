@@ -15,9 +15,12 @@ else
             <PropertyColumn Property="x => x.CreateDate" />
             <TemplateColumn Title="مبلغ">
                 <CellTemplate>
-                    @if (@context.Item.SupportType == SupportTypeEnum.Cash)
+                    @if (@context.Item.Payments != null)
                     {
-                        <MudText>@context.Item.Amount.ToString()</MudText>
+                        @foreach (var payment in @context.Item.Payments)
+                        {
+                            <MudText>@payment.Amount.ToString()</MudText>
+                        }
                     }
                 </CellTemplate>
             </TemplateColumn>
