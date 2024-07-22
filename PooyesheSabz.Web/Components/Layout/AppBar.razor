@@ -1,28 +1,20 @@
-﻿<MudAppBar Elevation="1">
+﻿<MudAppBar Elevation="0" Class="baackdrop-bluered">
     <AuthorizeView>
-        <NotAuthorized>
-            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="UpdateCurrentCounterValue" />
-        </NotAuthorized>
+        <Authorized>
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="MenuOnClick" />
+        </Authorized>
     </AuthorizeView>
-    <MudText Typo="Typo.h5" Class="ml-3" Color="Color.Default">پویش سبز کریم الائمه</MudText>
+    <MudText Typo="Typo.h5" Class="ml-3">@GlobalSettings.ApplicationName</MudText>
     <MudSpacer />
     <AuthorizeView>
         <NotAuthorized>
-            <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Login" Href="/Accounts/Login">ورود | ثبت نام</MudButton>
+            <BaseButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Login" Href="/Accounts/Login">ورود</BaseButton>
+            <BaseButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.AppRegistration" Href="/Accounts/Register">ثبت نام</BaseButton>
         </NotAuthorized>
     </AuthorizeView>
 </MudAppBar>
 
 @code {
     [Parameter]
-    public bool DrawerOpen { get; set; }
-
-    [Parameter]
-    public EventCallback<bool> DrawerOpenChanged { get; set; }
-
-    async Task UpdateCurrentCounterValue()
-    {
-        DrawerOpen = !DrawerOpen;
-        await DrawerOpenChanged.InvokeAsync(DrawerOpen);
-    }
+    public EventCallback MenuOnClick { get; set; }
 }

@@ -1,13 +1,30 @@
-﻿
-<MudNavMenu>
-    <MudNavLink Href="/Dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
-    <MudNavLink Href="/Notifications/My" Icon="@Icons.Material.Filled.Notifications">پیام‌ها</MudNavLink>
-    <MudNavGroup Title="حمایت" Icon="@Icons.Material.Filled.Favorite">
-        <MudNavLink Href="/Helps/New">جدید</MudNavLink>
-        <MudNavLink Href="/Helps/My">حمایت‌ها</MudNavLink>
-    </MudNavGroup>
-    <MudNavLink Href="/Transactions/My" Icon="@Icons.Material.Filled.Payments">پرداخت‌ها</MudNavLink>
-    <MudNavLink Href="/Profile" Icon="@Icons.Material.Filled.Person">حساب کاربری</MudNavLink>
-</MudNavMenu>
+﻿<AuthorizeView>
+    <Authorized>
+        <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
+            <MudNavMenu>
+                <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+                <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
+                <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
+                <MudNavGroup Title="حساب کاربری" Icon="@Icons.Material.Filled.AccountBox">
+                    <AuthorizeView Roles="@AuthorizeRoles.Admin" Context="_AdminCTX">
+                        <Authorized>
+                            <MudNavLink Href="/Accounts/All">لیست کاربران</MudNavLink>
+                            <MudDivider />
+                        </Authorized>
+                    </AuthorizeView>
+                    <MudNavLink Href="/Accounts/information">اطلاعات حساب کاربری</MudNavLink>
+                    <MudNavLink Href="/Accounts/SignOut">خروج</MudNavLink>
+                </MudNavGroup>
+            </MudNavMenu>
+        </MudDrawer>
+    </Authorized>
+</AuthorizeView>
 
-
+@code {
+    private bool _drawerOpen = true;
+    public void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+        StateHasChanged();
+    }
+}

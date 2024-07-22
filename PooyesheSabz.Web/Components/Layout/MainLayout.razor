@@ -1,28 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
-<MudRTLProvider RightToLeft>
-    <CascadingAuthenticationState>
-        <MudLayout>
-            <AppBar @bind-DrawerOpen=_DrawerOpen />
-            <AuthorizeView>
-                <NotAuthorized>
-                    <MudDrawer @bind-Open="_DrawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-                        <NavMenu />
-                    </MudDrawer>
-                </NotAuthorized>
-            </AuthorizeView>
+<MudThemeProvider Theme="@_theme" IsDarkMode="GlobalSettings.DarkMode" />
 
+<MudRTLProvider RightToLeft="GlobalSettings.RightToLeft">
+    <MudPopoverProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+    <MudLayout>
+        <CascadingAuthenticationState>
+            <AppBar MenuOnClick="(()=>_NavMenu.DrawerToggle())" />
+            <NavMenu @ref="_NavMenu" />
             <MudMainContent Class="mt-16 pa-4">
-                <MudContainer MaxWidth="MaxWidth.Medium">
+                <MudContainer MaxWidth="MaxWidth.Large">
                     @Body
                 </MudContainer>
             </MudMainContent>
-        </MudLayout>
-    </CascadingAuthenticationState>
+        </CascadingAuthenticationState>
+    </MudLayout>
 </MudRTLProvider>
 
 
@@ -33,9 +27,8 @@
 </div>
 
 @code {
-    bool _DrawerOpen = true;
-    private bool _isDarkMode = false;
     private MudTheme? _theme = null;
+    private NavMenu _NavMenu;
 
     protected override void OnInitialized()
     {
@@ -89,27 +82,25 @@
         {
             Black = "#110e2d",
             AppbarText = "#424242",
-            AppbarBackground = "rgba(80, 145, 25,0.8)",
-            DrawerBackground = "#ffffff",
+            AppbarBackground = "rgba(255,255,255,0.8)",
+            DrawerBackground = "rgba(255,255,255,0.8)",
             GrayLight = "#e8e8e8",
             GrayLighter = "#f9f9f9",
-            Primary = "#4CAF50",
-            Secondary = "#00BCD4"
         };
 
     private readonly PaletteDark _darkPalette = new()
         {
-            Primary = "#2c9111",
+            Primary = "#7e6fff",
             Surface = "#1e1e2d",
             Background = "#1a1a27",
             BackgroundGray = "#151521",
             AppbarText = "#92929f",
             AppbarBackground = "rgba(26,26,39,0.8)",
-            DrawerBackground = "#1a1a27",
+            DrawerBackground = "rgba(26,26,39,0.8)",
             ActionDefault = "#74718e",
             ActionDisabled = "#9999994d",
             ActionDisabledBackground = "#605f6d4d",
-            TextPrimary = "#b0bfb2",
+            TextPrimary = "#b2b0bf",
             TextSecondary = "#92929f",
             TextDisabled = "#ffffff33",
             DrawerIcon = "#92929f",
