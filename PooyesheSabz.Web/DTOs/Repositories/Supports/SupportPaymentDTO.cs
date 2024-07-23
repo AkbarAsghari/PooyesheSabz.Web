@@ -10,5 +10,6 @@ namespace PooyesheSabz.Web.DTOs.Repositories.Supports
     {
         public int Amount { get; set; }
         public string PaymentStatus { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

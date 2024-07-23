@@ -1,6 +1,7 @@
 ﻿@page "/Supports/My"
 @attribute [Authorize]
 
+@using PooyesheSabz.Web.DTOs.Repositories.Supports
 @using PooyesheSabz.Web.Enums
 
 @if (_Supports == null)
@@ -11,24 +12,52 @@ else
 {
     <MudDataGrid Items="@_Supports.OrderByDescending(x=> x.CreateDate)">
         <Columns>
+            <HierarchyColumn T="SupportDTO" ClosedIcon="@Icons.Material.Filled.KeyboardArrowLeft" />
             <PropertyColumn Property="x => x.SupportType" Title="نوع حمایت" />
-            <PropertyColumn Property="x => x.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()" Title="تاریخ"/>
-            <TemplateColumn Title="3 تراکنش های آخر">
+            <PropertyColumn Property="x => x.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()" Title="تاریخ" />
+            <TemplateColumn>
                 <CellTemplate>
+                    <MudAlert NoIcon Dense Severity="context.Item.HaveAnySuccessPayment ? Severity.Success : Severity.Warning" ContentAlignment="HorizontalAlignment.Center">
+                        <MudText Typo="Typo.caption">@(context.Item.HaveAnySuccessPayment ? "موفق" : "نا موفق")</MudText>
+                    </MudAlert>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <ChildRowContent>
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">لیست سه تراکنش آخر این حمایت</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="pa-2">
                     @if (@context.Item.Payments != null)
                     {
                         @foreach (var payment in @context.Item.Payments)
                         {
-                            <MudStack Row AlignItems="AlignItems.Center">
-                                <MudAlert Severity="Severity.Info" NoIcon Dense>
-                                    <MudText Typo="Typo.caption">@payment.PaymentStatus</MudText>
-                                </MudAlert>
-                                <MudText Typo="Typo.caption">مبلغ : @payment.Amount.Separate3Digits().EnglishToPersianNumbers()</MudText>
-                            </MudStack>
+                            <MudPaper Outlined Class="pa-2">
+                                <MudStack Row AlignItems="AlignItems.Center">
+                                    <MudAlert Severity="Severity.Info" NoIcon Dense>
+                                        <MudText Typo="Typo.caption">وضعیت : @payment.PaymentStatus</MudText>
+                                    </MudAlert>
+                                    <MudText Typo="Typo.caption">تاریخ : @payment.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                                    <MudAlert Severity="Severity.Normal" Dense NoIcon Class="px-5">
+                                        <MudText Typo="Typo.caption">@payment.Amount.Separate3Digits().EnglishToPersianNumbers() ريال</MudText>
+                                    </MudAlert>
+                                </MudStack>
+                            </MudPaper>
                         }
                     }
-                </CellTemplate>
-            </TemplateColumn>
-        </Columns>
+
+                    @if (!context.Item.HaveAnySuccessPayment)
+                    {
+                        <MudAlert Class="my-2" Dense Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+                            <MudText>بعلت عدم پرداخت موفق در این حمایت شما میتوانید از دکمه زیر نسبت به پرداخت این حمایت اقدام نمایید</MudText>
+                        </MudAlert>
+                        <BaseButton Color="Color.Primary" Class="px-10" Variant="Variant.Filled" OnClick="()=> PaySupport(context.Item.Id)">پرداخت</BaseButton>
+                    }
+                </MudCardContent>
+            </MudCard>
+        </ChildRowContent>
     </MudDataGrid>
 }
