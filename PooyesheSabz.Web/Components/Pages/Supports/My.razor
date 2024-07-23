@@ -4,20 +4,22 @@
 @using PooyesheSabz.Web.DTOs.Repositories.Supports
 @using PooyesheSabz.Web.Enums
 
+<MudText Typo="Typo.h3" Class="mb-3">حمایت های من</MudText>
+
 @if (_Supports == null)
 {
 
 }
 else
 {
-    <MudDataGrid Items="@_Supports.OrderByDescending(x=> x.CreateDate)">
+    <MudDataGrid Items="@_Supports.OrderByDescending(x=> x.CreateDate)" Dense>
         <Columns>
             <HierarchyColumn T="SupportDTO" ClosedIcon="@Icons.Material.Filled.KeyboardArrowLeft" />
             <PropertyColumn Property="x => x.SupportType" Title="نوع حمایت" />
             <PropertyColumn Property="x => x.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()" Title="تاریخ" />
-            <TemplateColumn>
+            <TemplateColumn Title="وضعیت">
                 <CellTemplate>
-                    <MudAlert NoIcon Dense Severity="context.Item.HaveAnySuccessPayment ? Severity.Success : Severity.Warning" ContentAlignment="HorizontalAlignment.Center">
+                    <MudAlert NoIcon Dense Variant="Variant.Filled" Severity="context.Item.HaveAnySuccessPayment ? Severity.Success : Severity.Warning" ContentAlignment="HorizontalAlignment.Center">
                         <MudText Typo="Typo.caption">@(context.Item.HaveAnySuccessPayment ? "موفق" : "نا موفق")</MudText>
                     </MudAlert>
                 </CellTemplate>
