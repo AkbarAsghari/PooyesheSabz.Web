@@ -1,0 +1,14 @@
+﻿@using Jdenticon
+
+@if (String.IsNullOrEmpty(UserId))
+{
+    <AuthorizeView>
+        <Authorized>
+            @((MarkupString)GenerateProfilePhoto(String.IsNullOrEmpty(UserId) ? @context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value : UserId))
+        </Authorized>
+    </AuthorizeView>
+}
+else
+{
+    @((MarkupString)GenerateProfilePhoto(UserId))
+}

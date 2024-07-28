@@ -1,4 +1,6 @@
 ﻿using MD.PersianDateTime.Standard;
+using PooyesheSabz.Web.Utilities;
+using System.Globalization;
 using System.Text;
 
 namespace PooyesheSabz.Web.Extensions
@@ -51,6 +53,11 @@ namespace PooyesheSabz.Web.Extensions
             foreach (var item in persianStr.Where(x => LettersDictionaryEnToFa.Keys.Contains(x)))
                 sb.Replace(item, LettersDictionaryEnToFa[item]);
             return sb.ToString();
+        }
+
+        public static string CalcRelativeTime(this DateTime dateTime)
+        {
+            return RelativeTimeCalculator.Calc(dateTime);
         }
     }
 }
