@@ -9,7 +9,6 @@ partial class Page
     [Inject] public IPageRepository _PageRepository { get; set; }
     [Inject] public NavigationManager _NavigationManager { get; set; }
 
-    [Parameter] public string PageType { get; set; }
     [Parameter] public string URL { get; set; }
 
     PublishPageDTO? publishPageDTO;
@@ -17,13 +16,13 @@ partial class Page
 
     protected override async Task OnInitializedAsync()
     {
-        publishPageDTO = await _PageRepository.GetPageByURLAsync(url: $"{PageType}/{URL}");
+        publishPageDTO = await _PageRepository.GetPageByURLAsync(url: $"{URL}");
 
         if (publishPageDTO == null)
         {
             _NavigationManager.NavigateTo("404");
         }
-        var pageMetadata = await _PageRepository.GetPageMetadataAsync($"{PageType}/{URL}");
+        var pageMetadata = await _PageRepository.GetPageMetadataAsync($"{URL}");
 
         keywords = pageMetadata == null ? null : pageMetadata.Keywords;
 

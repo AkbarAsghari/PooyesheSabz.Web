@@ -1,4 +1,4 @@
-﻿@page "/Page/{PageType}/{*URL}"
+﻿@page "/Page/{*URL}"
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="ck-content">
     @if (publishPageDTO != null)
@@ -9,8 +9,8 @@
         <MudDivider Class="mb-1 mt-2" />
         @((MarkupString)@publishPageDTO.Body)
 
-        <MudText Typo="Typo.h3">کلمات کلیدی</MudText>
-        <MudGrid Class="mt-1 mb-1">
+        <MudText Typo="Typo.h5" Class="mt-10 mb-1">کلمات کلیدی</MudText>
+        <MudGrid Spacing="1">
             @if (keywords != null)
             {
                 @foreach (var item in keywords)

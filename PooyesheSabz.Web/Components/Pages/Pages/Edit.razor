@@ -1,5 +1,12 @@
-﻿@page "/Pages/Edit"
+﻿@page "/Pages/Edit/{PageId:guid}"
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 
-<PageGeneratorForm Page=existPage OnValidSubmit=Update Title="ایجاد صفحه جدید"></PageGeneratorForm>
+@if (existPage == null)
+{
+    <MudText>در حال بارگذاری</MudText>
+}
+else
+{
+    <PageGeneratorForm Page=existPage OnValidSubmit=Update Title="ایجاد صفحه جدید"></PageGeneratorForm>
+}

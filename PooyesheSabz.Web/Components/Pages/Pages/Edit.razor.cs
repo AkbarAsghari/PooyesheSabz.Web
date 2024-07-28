@@ -12,7 +12,7 @@ partial class Edit
 
     [Parameter] public Guid PageId { get; set; }
 
-    private PageDTO existPage;
+    private PageDTO? existPage;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -25,10 +25,10 @@ partial class Edit
 
     public async Task Update()
     {
-        if (await _PageRepository.UpdatePageAsync(existPage))
+        if (await _PageRepository.UpdatePageAsync(existPage!))
         {
-            _NavigationManager.NavigateTo("Page/MyPages");
-            _Snackbar.Add($"صفحه {existPage.Title} با موفقیت ویرایش شد", Severity.Success);
+            _NavigationManager.NavigateTo("Pages/My");
+            _Snackbar.Add($"صفحه {existPage!.Title} با موفقیت ویرایش شد", Severity.Success);
         }
     }
 }

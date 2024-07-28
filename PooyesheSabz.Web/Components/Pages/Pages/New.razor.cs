@@ -25,7 +25,7 @@ partial class New
     {
         if (await _PageRepository.NewPageAsync(page))
         {
-            _NavigationManager.NavigateTo("Page/MyPages");
+            _NavigationManager.NavigateTo("Pages/My");
             _Snackbar.Add($"صفحه {page.Title} با موفقیت ایجاد شد", Severity.Success);
         }
     }

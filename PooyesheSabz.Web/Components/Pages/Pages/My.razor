@@ -8,6 +8,9 @@
 }
 else
 {
+    <MudText Typo="Typo.h2">محتوا ها</MudText>
+    <BaseButton Href="Pages/New" Class="my-2" Variant="Variant.Filled" Color="Color.Primary">ایجاد صفحه جدید</BaseButton>
+
     @if (_PageSummaries.Count() == 0)
     {
         <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
@@ -16,8 +19,6 @@ else
     }
     else
     {
-        <MudText Typo="Typo.h2">محتوا ها</MudText>
-        <BaseButton Href="Pages/New">ایجاد صفحه جدید</BaseButton>
         <MudDataGrid Items="@_PageSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false"
                      SortMode="@SortMode.None" Groupable="false">
             <Columns>
@@ -26,7 +27,7 @@ else
                         <MudLink Class="text-decoration-none"
                                  Href="@($"https://pooyeshesabz.ir/Page/{context.Item.URL}")" Target="_blank">
                             <MudText>
-                                dnslab.link/Page/<code>@($"/{@context.Item.URL}")</code>
+                                pooyeshesabz.ir/Page/<code>@($"{@context.Item.URL}")</code>
                             </MudText>
                         </MudLink>
                     </CellTemplate>

@@ -10,7 +10,7 @@ namespace PooyesheSabz.Web.Repositories
         const string APIController = "Page";
         public async Task<bool> DeletePageAsync(Guid id)
         {
-            return await _HttpServiceProvider.Delete<bool>($"{APIController}/GetAllPagesSummaryAsync?id={id}");
+            return await _HttpServiceProvider.Delete<bool>($"{APIController}/DeletePageAsync?id={id}");
         }
 
         public async Task<IEnumerable<PageSummaryDTO>?> GetAllPagesSummaryAsync()

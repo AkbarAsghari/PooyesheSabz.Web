@@ -27,6 +27,7 @@ namespace PooyesheSabz.Web
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<ISupportRepository, SupportRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+            builder.Services.AddScoped<IPageRepository, PageRepository>();
 
 
             builder.Services.AddHttpContextAccessor();
