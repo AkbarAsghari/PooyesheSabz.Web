@@ -3,6 +3,14 @@
         <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
             <MudNavMenu>
                 <MudNavLink Href="/Dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">داشبورد</MudNavLink>
+                <AuthorizeView Roles="@($"{@AuthorizeRoles.Admin},{@AuthorizeRoles.Writer}")" Context="_WritersCTX">
+                    <Authorized>
+                        <MudNavGroup Title="تولید محوا" Icon="@Icons.Material.Filled.Newspaper">
+                            <MudNavLink Href="/Pages/New">صفحه جدید</MudNavLink>
+                            <MudNavLink Href="/Pages/My">محتوا های من</MudNavLink>
+                        </MudNavGroup>
+                    </Authorized>
+                </AuthorizeView>
                 <MudNavGroup Title="حمایت" Icon="@Icons.Material.Filled.Favorite">
                     <MudNavLink Href="/Supports/New">جدید</MudNavLink>
                     <MudNavLink Href="/Supports/My">حمایت های من</MudNavLink>
