@@ -1,0 +1,30 @@
+﻿<EditForm Model="Page" Context=PageContext>
+    <MudText Typo="Typo.h3">@Title</MudText>
+    <MudGrid>
+        <MudItem sm="12" md="6">
+            <MudTextField Class="mud-ltr" Label="آدرس URL" Placeholder="sample-url"
+                          @bind-Value="Page.URL" ReadOnly=@(!(Page.PublishDate == null ||
+                          Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow)) Required />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="عنوان تب" Placeholder="عنوان تب"
+                          @bind-Value="Page.Title" Required />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="خلاصه توضیحات" Placeholder="خلاصه توضیحات"
+                          @bind-Value="Page.Description" Required />
+        </MudItem>
+        <MudItem xs="12">
+            <TagsInput Tags="@Page.Keywords"></TagsInput>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="هدر" Placeholder="عنوان بالای صفحه"
+                          @bind-Value="Page.Header" Required />
+        </MudItem>
+        <MudItem xs="12">
+            <TextEditor @bind-Value=@Page.Body></TextEditor>
+        </MudItem>
+    </MudGrid>
+    <BaseButton Color=Color.Primary EndIcon=@Icons.Material.Filled.Save EditContext=PageContext OnClick=OnValidSubmit>ذخیره</BaseButton>
+    <BaseButton Href="Page/MyPages" Color="Color.Secondary" EndIcon=@Icons.Material.Filled.Cancel>انصراف</BaseButton>
+</EditForm>

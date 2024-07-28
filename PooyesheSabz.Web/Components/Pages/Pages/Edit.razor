@@ -1,0 +1,5 @@
+﻿@page "/Pages/Edit"
+
+@attribute [Authorize(Roles = "Admin,Writer")]
+
+<PageGeneratorForm Page=existPage OnValidSubmit=Update Title="ایجاد صفحه جدید"></PageGeneratorForm>
