@@ -6,7 +6,7 @@
             DecoupledEditor
                 .create(document.querySelector('#ckeditor'), {
                     language: 'fa',
-                    ckfinder: { uploadUrl: 'https://api.dnslab.link/Files/Upload' }
+                    ckfinder: { uploadUrl: 'https://api.pooyeshesabz.ir/Files/Upload' }
                 })
                 .then(editor => {
                     const toolbarContainer = document.querySelector('#toolbar-container');
