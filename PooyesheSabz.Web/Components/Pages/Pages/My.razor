@@ -1,0 +1,51 @@
+﻿@page "/Pages/My"
+
+@attribute [Authorize(Roles = "Admin,Writer")]
+
+@if (_PageSummaries == null)
+{
+    <MudText>در حال بارگذاری</MudText>
+}
+else
+{
+    @if (_PageSummaries.Count() == 0)
+    {
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
+            <MudText>تا کنون هیچ صفحه‌ای توسط شما تولید نشده است</MudText>
+        </MudAlert>
+    }
+    else
+    {
+        <MudText Typo="Typo.h2">محتوا ها</MudText>
+        <BaseButton Href="Pages/New">ایجاد صفحه جدید</BaseButton>
+        <MudDataGrid Items="@_PageSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false"
+                     SortMode="@SortMode.None" Groupable="false">
+            <Columns>
+                <TemplateColumn Title="لینک">
+                    <CellTemplate>
+                        <MudLink Class="text-decoration-none"
+                                 Href="@($"https://pooyeshesabz.ir/Page/{context.Item.URL}")" Target="_blank">
+                            <MudText>
+                                dnslab.link/Page/<code>@($"/{@context.Item.URL}")</code>
+                            </MudText>
+                        </MudLink>
+                    </CellTemplate>
+                </TemplateColumn>
+                <PropertyColumn Property="x=>x.Description" CellClass="text-truncate"
+                                Title="خلاصه توضیحات" />
+                <TemplateColumn>
+                    <CellTemplate>
+                        <MudStack Row>
+                            <BaseButton Color=Color.Warning EndIcon=@Icons.Material.Filled.Edit OnClick=@(()=>EditPage(context.Item))>ویرایش</BaseButton>
+                            <BaseButton Color=Color.Error EndIcon=@Icons.Material.Filled.Delete OnClick=@(()=>DeletePage(context.Item))>حذف</BaseButton>
+                            @if (!context.Item.IsPublieshed)
+                            {
+                                <BaseButton Color=Color.Error EndIcon=@Icons.Material.Filled.Publish OnClick=@(()=>PublishPage(context.Item))>انتشار</BaseButton>
+                            }
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+        </MudDataGrid>
+    }
+}
