@@ -1,13 +1,13 @@
 ﻿@page "/Page/{*URL}"
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="ck-content">
-    @if (publishPageDTO != null)
+    @if (_PublishPageDTO != null)
     {
-        <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
-        <PageSummary FullName="@publishPageDTO.Author.FullName" UserId="@publishPageDTO.Author.ID"
-                     PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />
+        <MudText Typo="Typo.h1" Class="mb-5">@_PublishPageDTO.Title</MudText>
+        <PageSummary FullName="@_PublishPageDTO.Author.FullName" UserId="@_PublishPageDTO.Author.ID"
+                     PublishDate="@_PublishPageDTO.PublishDate" UpdateDate="@_PublishPageDTO.UpdateDate" />
         <MudDivider Class="mb-1 mt-2" />
-        @((MarkupString)@publishPageDTO.Body)
+        @((MarkupString)@_PublishPageDTO.Body)
 
         <MudText Typo="Typo.h5" Class="mt-10 mb-1">کلمات کلیدی</MudText>
         <MudGrid Spacing="1">

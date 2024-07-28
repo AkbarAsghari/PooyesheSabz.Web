@@ -11,14 +11,14 @@ partial class Page
 
     [Parameter] public string URL { get; set; }
 
-    PublishPageDTO? publishPageDTO;
+    PublishPageDTO? _PublishPageDTO;
     string[]? keywords;
 
     protected override async Task OnInitializedAsync()
     {
-        publishPageDTO = await _PageRepository.GetPageByURLAsync(url: $"{URL}");
+        _PublishPageDTO = await _PageRepository.GetPageByURLAsync(url: $"{URL}");
 
-        if (publishPageDTO == null)
+        if (_PublishPageDTO == null)
         {
             _NavigationManager.NavigateTo("404");
         }

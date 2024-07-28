@@ -22,6 +22,8 @@ else
         <MudDataGrid Items="@_PageSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false"
                      SortMode="@SortMode.None" Groupable="false">
             <Columns>
+                <PropertyColumn Property="x=>x.Title" CellClass="text-truncate"
+                                Title="عنوان" />
                 <TemplateColumn Title="لینک">
                     <CellTemplate>
                         <MudLink Class="text-decoration-none"
@@ -34,14 +36,14 @@ else
                 </TemplateColumn>
                 <PropertyColumn Property="x=>x.Description" CellClass="text-truncate"
                                 Title="خلاصه توضیحات" />
-                <TemplateColumn>
+                <TemplateColumn >
                     <CellTemplate>
                         <MudStack Row>
-                            <BaseButton Color=Color.Warning EndIcon=@Icons.Material.Filled.Edit OnClick=@(()=>EditPage(context.Item))>ویرایش</BaseButton>
-                            <BaseButton Color=Color.Error EndIcon=@Icons.Material.Filled.Delete OnClick=@(()=>DeletePage(context.Item))>حذف</BaseButton>
+                            <BaseButton Color=Color.Warning Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Edit OnClick=@(()=>EditPage(context.Item))>ویرایش</BaseButton>
+                            <BaseButton Color=Color.Error Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Delete OnClick=@(()=>DeletePage(context.Item))>حذف</BaseButton>
                             @if (!context.Item.IsPublieshed)
                             {
-                                <BaseButton Color=Color.Error EndIcon=@Icons.Material.Filled.Publish OnClick=@(()=>PublishPage(context.Item))>انتشار</BaseButton>
+                                <BaseButton Color=Color.Success Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Publish OnClick=@(()=>PublishPage(context.Item))>انتشار</BaseButton>
                             }
                         </MudStack>
                     </CellTemplate>

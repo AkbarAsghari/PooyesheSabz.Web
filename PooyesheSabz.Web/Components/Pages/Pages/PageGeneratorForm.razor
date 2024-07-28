@@ -3,13 +3,13 @@
     <MudText Typo="Typo.h3">@Title</MudText>
     <MudGrid Spacing="2" Class="my-2">
         <MudItem xs="12" md="6">
+            <MudTextField Variant="Variant.Outlined" Label="عنوان" Placeholder="عنوان"
+                          @bind-Value="Page.Title" Required />
+        </MudItem>
+        <MudItem xs="12" md="6">
             <MudTextField Variant="Variant.Outlined" Class="mud-ltr" Label="آدرس URL" Placeholder="sample-url"
                           @bind-Value="Page.URL" ReadOnly=@(!(Page.PublishDate == null ||
                           Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow)) Required />
-        </MudItem>
-        <MudItem xs="12" md="6">
-            <MudTextField Variant="Variant.Outlined" Label="عنوان تب" Placeholder="عنوان تب"
-                          @bind-Value="Page.Title" Required />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Variant="Variant.Outlined" Lines="3" Label="خلاصه توضیحات" Placeholder="خلاصه توضیحات"
