@@ -6,6 +6,22 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Components\Pages\Accounts\All.razor" />
+    <None Include="Components\Pages\Accounts\Information.razor" />
+    <None Include="Components\Pages\Accounts\Login.razor" />
+    <None Include="Components\Pages\Accounts\Register.razor" />
+    <None Include="Components\Pages\Accounts\SignOut.razor" />
+    <None Include="Components\Pages\Counter.razor" />
+    <None Include="Components\Pages\Defaults\Dashboard.razor" />
+    <None Include="Components\Pages\Error.razor" />
+    <None Include="Components\Pages\Home.razor" />
+    <None Include="Components\Pages\Payments\Callback.razor" />
+    <None Include="Components\Pages\Supports\My.razor" />
+    <None Include="Components\Pages\Supports\New.razor" />
+    <None Include="Components\Pages\Weather.razor" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="MD.PersianDateTime.Standard" Version="2.5.0" />
